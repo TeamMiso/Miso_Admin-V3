@@ -4,12 +4,19 @@ import { Input, Button } from "@/components/ui";
 import { useForm } from "react-hook-form";
 
 export default function Auth() {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm();
 
   return (
     <div className="w-full h-full bg-auth bg-cover bg-center flex items-center justify-center">
       <form
-        onSubmit={handleSubmit((data) => alert(JSON.stringify(data)))}
+        onSubmit={handleSubmit(async (data) => {
+          await new Promise((r) => setTimeout(r, 1_000));
+          alert(JSON.stringify(data));
+        })}
         className="bg-white w-[27rem] h-[35rem] px-6 py-10 space-y-reverse flex flex-wrap content-between border border-gray-300 rounded-[8px]"
       >
         <div>
@@ -41,6 +48,7 @@ export default function Auth() {
           variant="ghost"
           font="lg"
           size="full"
+          disabled={isSubmitting}
         >
           로그인
         </Button>
