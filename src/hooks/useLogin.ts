@@ -34,9 +34,8 @@ export const useLogin = () => {
         title: "로그인에 성공하셨습니다.",
       });
     },
-    onError: (error: unknown) => {
-      const axiosError = error as AxiosError;
-      const statusCode = axiosError.response?.status;
+    onError: (error) => {
+      const statusCode = error.response?.status;
       const errorMessage = statusCode
         ? setErrorTextByStatusCode(statusCode)
         : "알 수 없는 오류가 발생했습니다.";
