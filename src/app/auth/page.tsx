@@ -1,8 +1,8 @@
 "use client";
 
-import { login } from "@/apis";
 import { Input, Button } from "@/components/ui";
-import { LoginTypes } from "@/types";
+import { useLogin } from "@/hooks";
+import { LoginReqTypes } from "@/types";
 import { useForm, SubmitHandler } from "react-hook-form";
 
 export default function Auth() {
@@ -10,12 +10,13 @@ export default function Auth() {
     register,
     handleSubmit,
     formState: { isSubmitting, errors },
-  } = useForm<LoginTypes>();
+  } = useForm<LoginReqTypes>();
 
-  const onSubmit: SubmitHandler<LoginTypes> = async (data) => {
+  const { mutate } = useLogin();
+
+  const onSubmit: SubmitHandler<LoginReqTypes> = async (data) => {
     await new Promise((r) => setTimeout(r, 1_000));
-    alert(JSON.stringify(data));
-    await login(data);
+    mutate(data);
   };
 
   return (
