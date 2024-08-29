@@ -9,14 +9,15 @@ export default function Auth() {
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting, errors },
+    formState: { errors },
   } = useForm<LoginReqTypes>();
 
-  const { mutate } = useLogin();
+  const { mutate, isPending } = useLogin();
 
-  const onSubmit: SubmitHandler<LoginReqTypes> = async (data) => {
-    await new Promise((r) => setTimeout(r, 1_000));
-    mutate(data);
+  const onSubmit: SubmitHandler<LoginReqTypes> = (data) => {
+    if (!isPending) {
+      mutate(data);
+    }
   };
 
   return (
@@ -85,7 +86,7 @@ export default function Auth() {
           variant="ghost"
           font="lg"
           size="full"
-          disabled={isSubmitting}
+          disabled={isPending}
         >
           로그인
         </Button>
