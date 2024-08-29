@@ -4,6 +4,8 @@ export interface LoginReqTypes {
 }
 
 export interface LoginResTypes {
-  success: boolean;
-  token: string;
+  accessToken: string;
+  refreshToken: string;
+  accessExp: string;
+  refreshExp: string;
 }

@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { login } from "@/apis";
 import { useToast } from "@/components/ui";
 import { useRouter } from "next/navigation";
+import { LoginReqTypes, LoginResTypes } from "@/types";
 
 interface AxiosError extends Error {
   response?: {
@@ -28,7 +29,7 @@ export const useLogin = () => {
     }
   };
 
-  return useMutation({
+  return useMutation<LoginResTypes, AxiosError, LoginReqTypes>({
     mutationFn: login,
     onSuccess: (data) => {
       localStorage.setItem("accessToken", data.accessToken);
