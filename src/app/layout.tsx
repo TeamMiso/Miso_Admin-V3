@@ -20,8 +20,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html className="w-100 h-100" lang="en">
-      <body className={`${inter.className} w-100 h-100`}>
+    <html className="w-full h-full" lang="en">
+      <body className={`${inter.className} w-full h-full`}>
         <Provider>
           {children}
           <Toaster />
