@@ -3,12 +3,7 @@ import { login } from "@/apis";
 import { useToast } from "@/components/ui";
 import { useRouter } from "next/navigation";
 import { LoginReqTypes, LoginResTypes } from "@/types";
-
-interface AxiosError extends Error {
-  response?: {
-    status: number;
-  };
-}
+import { AxiosError } from "axios";
 
 export const useLogin = () => {
   const { toast } = useToast();
