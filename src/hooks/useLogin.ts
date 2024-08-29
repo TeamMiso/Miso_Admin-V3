@@ -3,7 +3,7 @@ import { login } from "@/apis";
 import { useToast } from "@/components/ui";
 import { useRouter } from "next/navigation";
 
-interface HttpError extends Error {
+interface AxiosError extends Error {
   response?: {
     status: number;
   };
@@ -39,8 +39,8 @@ export const useLogin = () => {
       });
     },
     onError: (error: unknown) => {
-      const httpError = error as HttpError;
-      const statusCode = httpError.response?.status;
+      const axiosError = error as AxiosError;
+      const statusCode = axiosError.response?.status;
       const errorMessage = statusCode
         ? setErrorTextByStatusCode(statusCode)
         : "알 수 없는 오류가 발생했습니다.";
