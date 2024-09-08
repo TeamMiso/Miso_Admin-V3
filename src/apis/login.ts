@@ -11,5 +11,5 @@ export const login = async (data: LoginReqTypes) => {
     },
   });
 
-  return loginRes.data;
+  if (roleRes.data.role === "ROLE_ADMIN") return loginRes.data;
 };
