@@ -3,5 +3,5 @@ export interface RoleTypes {
   email: string;
   password: string;
   point: number;
-  role: string;
+  role: "ROLE_ADMIN" | "ROLE_USER";
 }
