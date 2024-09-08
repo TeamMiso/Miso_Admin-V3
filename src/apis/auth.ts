@@ -1,8 +1,16 @@
 import { axiosInstance } from "@/libs";
-import { LoginReqTypes } from "@/types";
+import { LoginReqTypes, RoleTypes } from "@/types";
 
 export const login = async (data: LoginReqTypes) => {
-  const response = await axiosInstance.post("/auth/signIn", data);
+  const loginRes = await axiosInstance.post("/auth/signIn", data);
 
-  return response.data;
+  const roleRes: RoleTypes = await axiosInstance.get("/user", {
+    headers: {
+      Authorization: `Bearer ${loginRes.data.accessToken}`,
+    },
+  });
+
+  if (roleRes.role === "ROLE_AMDIN") {
+    return loginRes.data;
+  }
 };
