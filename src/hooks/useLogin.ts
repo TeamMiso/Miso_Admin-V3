@@ -29,6 +29,7 @@ export const useLogin = () => {
     onSuccess: (data) => {
       localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("refreshToken", "Bearer " + data.refreshToken);
+
       push("/");
       toast({
         title: "로그인에 성공하셨습니다.",
@@ -38,7 +39,7 @@ export const useLogin = () => {
       const statusCode = error.response?.status;
       const errorMessage = statusCode
         ? setErrorTextByStatusCode(statusCode)
-        : "알 수 없는 오류가 발생했습니다.";
+        : "관리자 계정으로 로그인 해주세요.";
 
       toast({
         variant: "destructive",
